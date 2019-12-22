@@ -15,7 +15,7 @@ do
     hbase shell ./hbase_truncate
 
     echo "Loading data for" "$work"
-    ./bin/ycsb load $driver -P workloads/"$work" -p table=usertable -p columnfamily=family -p recordcount=$records -threads 40 > BenchmarkLogs/"$work""_load.log"
+    ./bin/ycsb load $driver -P workloads/"$work" -p table=usertable -p columnfamily=family -p recordcount=$records -threads 40 -s > BenchmarkLogs/"$work""_load.log"
     echo "Running tests"
 
     for operation in "${operations[@]}"
