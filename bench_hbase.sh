@@ -9,14 +9,14 @@ driver="hbase14"
 for work in "${workloads[@]}"
 do
     echo "Loading data for" "$work"
-    ./bin/ycsb load $driver -P ./workloads/"$work" -p table=usertable -p columnfamily=family -p recordcount=$records -threads $threads > "$work""_load.log"
+    ./bin/ycsb load $driver -P workloads/"$work" -p table=usertable -p columnfamily=family -p recordcount=$records -threads $threads > "$work""_load.log"
     echo "Running tests"
 
     for operation in "${operations[@]}"
     do
         for r in $(seq 1 $repeatrun)
         do
-            ./bin/ycsb run $driver -P ./workloads/"$work" -p table=usertable -p columnfamily=family recordcount=$records -p operationcount=operation -threads $threads > "$work""_op_""$operation""_run_""$r"".log"
+            ./bin/ycsb run $driver -P workloads/"$work" -p table=usertable -p columnfamily=family recordcount=$records -p operationcount=operation -threads $threads > "$work""_op_""$operation""_run_""$r"".log"
         done
     done
     #Truncate table and start over
