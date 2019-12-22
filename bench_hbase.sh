@@ -2,7 +2,7 @@
 workloads=("workloada" "workloadb" "workloadc" "workloadd" "workloade" "workloadf")
 operations=("250000" "500000" "1000000" "5000000" "10000000")
 repeatrun=3
-records=300000000
+records=30000000
 loadthreads=40
 runthreads=400
 driver="hbase14"
