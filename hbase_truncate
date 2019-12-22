@@ -1,4 +1,4 @@
 disable 'usertable'
 drop 'usertable'
-create 'usertable', 'family', {SPLITS => (1..120).map {|i| "user#{1000+i*(9999-1000)/120}"}, MAX_FILESIZE => 4*1024**3}
+create 'usertable', 'family', {SPLITS => (1..200).map {|i| "user#{1000+i*(9999-1000)/200}"}, MAX_FILESIZE => 4*1024**3}
 exit
