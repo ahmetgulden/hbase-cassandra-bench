@@ -9,13 +9,13 @@ driver="hbase14"
 rm -rf BenchmarkLogs
 mkdir BenchmarkLogs
 
-#Truncate table and start over
-hbase shell ./hbase_truncate
-
 for work in "${workloads[@]}"
 do
+    #Truncate table and start over
+    hbase shell ./hbase_truncate
+
     echo "Loading data for" "$work"
-    ./bin/ycsb load $driver -P workloads/"$work" -p table=usertable -p columnfamily=family -p recordcount=$records -threads $threads > BenchmarkLogs/"$work""_load.log"
+    ./bin/ycsb load $driver -P workloads/"$work" -p table=usertable -p columnfamily=family -p recordcount=$records -threads 40 > BenchmarkLogs/"$work""_load.log"
     echo "Running tests"
 
     for operation in "${operations[@]}"
@@ -25,7 +25,5 @@ do
             ./bin/ycsb run $driver -P workloads/"$work" -p table=usertable -p columnfamily=family -p recordcount=$records -p operationcount=$operation -threads $threads > BenchmarkLogs/"$work""_op_""$operation""_run_""$r"".log"
         done
     done
-    #Truncate table and start over
-    hbase shell ./hbase_truncate
 done
 
