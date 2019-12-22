@@ -9,6 +9,9 @@ driver="hbase14"
 rm -rf BenchmarkLogs
 mkdir BenchmarkLogs
 
+#Truncate table and start over
+hbase shell ./hbase_truncate
+
 for work in "${workloads[@]}"
 do
     echo "Loading data for" "$work"
